@@ -1,0 +1,87 @@
+.App {
+    margin: auto;
+    width: 560px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, 140px [col-start]);
+    grid-template-rows: repeat(4, 140px [col-start]);
+
+}
+
+.Card {
+    z-index: 1;
+    width: 90%;
+    height: 90%;
+    background-image: linear-gradient(60deg, rgba(141, 141, 141, 0.24), rgba(239, 231, 231, 0.9), rgba(141, 141, 141, 0.24)),
+    linear-gradient(-60deg, rgba(141, 141, 141, 0.24), rgba(217, 213, 213, 0.9), rgba(141, 141, 141, 0.24));
+    margin: 10%;
+    border-radius: 5px;
+    box-shadow: 0px 4px #a8a8a8,
+    0px 8px 5px grey;
+
+    transition: 0.7s;
+}
+
+.Card.clicked {
+    transform: rotate3d(0, 1, 0, 180deg);
+
+}
+
+.Card.found {
+    transform: rotate3d(0, 1, 1, 540deg)
+}
+
+.images {
+    opacity: 0;
+    transform: rotate3d(0, 1, 0, 90deg);
+    white-space: nowrap;
+    width: 50%;
+    display: block;
+    margin: 25%;
+
+    transition: transform 0.7s,
+    opacity 0s 0.2s;
+
+}
+
+.Card.clicked > .images {
+    opacity: 1;
+    transform: rotate3d(0, 1, 0, 180deg);
+
+
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
