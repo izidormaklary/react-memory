@@ -1,25 +1,40 @@
 import './App.css';
+import {useState} from "react";
+import Game from "./components/Game";
+import StartButton from "./components/StartButton";
+import Leaderboard from "./components/Leaderboard";
 
-import Card from "./components/Card";
-
-
+let iniUsers = [
+    {name: "John", time: 1.1, id: 1, clicks: 65},
+    {name: "John", time: 1.2, id: 1, clicks: 55},
+    {name: "John", time: 0.4, id: 1, clicks: 54},
+    {name: "John", time: 1.0, id: 1, clicks: 90}
+]
 
 function App() {
-    let comps = Array.from(Array(8).keys()).concat(Array.from(Array(8).keys()));
-    console.log(comps)
-    comps = comps.sort(() => Math.random() - 0.5)
-    console.log(comps)
+    const [gameState, setGameState] = useState(false);
+    const [users, setUsers] = useState( iniUsers)
+    function startGame() {
+
+        setGameState(true)
+        console.log(gameState)
+    }
+
     return (
         <div className="App">
-            {comps.map((value, index) => {
-                let src = "./resources/" + value + ".png"
-                let id = index;
-                return (
-                    <>
 
-                        <Card id={id} value={value} src={src}  />
+            {gameState
+                ? (
+                    <>
+                        <Game/>
+
                     </>)
-            })}
+                : (
+                    <>
+                        <StartButton onClick={() => startGame()}/>
+                        <Leaderboard users={users} />
+                    </>)
+            }
         </div>
     );
 }
