@@ -1,55 +1,38 @@
 import Card from "./Card";
 import Progress from "./Progress";
-import {useState} from "react";
+import {createRef, useState} from "react";
+import WinnerForm from "./WinnerForm";
 
-let cardsRn = [];
 let pairs = [];
 
 
-let cardArr = []
-for (let i = 0; i < 8; i++) {
-    let element = {
-        id: i,
-        src: "./resources/" + i + ".png",
-        pairId: i,
-        flipped: false,
-        found: false
-    }
-    let element2 = {
-        id: i + 8,
-        src: "./resources/" + i + ".png",
-        pairId: i,
-        flipped: false,
-        found: false
-    };
-    cardArr.push(element);
-    cardArr.push(element2);
-}
-cardArr = cardArr.sort(() => Math.random() - 0.5);
-
-
-function Game() {
+function Game({users, setUsers, setGameState, cardArr}) {
     function clickEvent(card) {
-        if (!card.found && !card.flipped) {
+        if (!card.found && !card.flipped && card !== prevCard) {
+
+            clickCount();
 
             flipCard(card)
-            cardsRn.push(card)
+            if (prevCard) {
+                if (prevCard.pairId === card.pairId) {
+                    foundCards(prevCard, card)
 
-            if (cardsRn.length === 2) {
-                let card1 = cardsRn[0];
-                let card2 = cardsRn[1]
-                if (card1.pairId === card2.pairId && card1 !== card2) {
-                    setTimeout(foundCards,500,card1,card2)
-                    pairs.push(card1, card2)
-                } else {
-                    cardsRn.forEach(card =>flipCard(card))
+                    pairs.push(prevCard, card)
                 }
-                cardsRn = []
+                setPrevCard(null)
+            } else {
+                setPrevCard(card)
             }
+
             if (pairs.length === 16) {
+                refSec.current.timeSetter()
+                setTimeout(setWon, 500,true)
+                pairs = [];
 
             }
+
         }
+
     }
 
     function flipCard(card) {
@@ -72,43 +55,64 @@ function Game() {
         let element2 = tempArr.find(el => el.id === card2.id);
 
         element1.found = true;
-        element1.flipped = false;
         element2.found = true;
-        element2.flipped = false;
+        element1.flipped= false;
+        element2.flipped= false;
         setCards(tempArr)
     }
 
-    function youWon() {
-        alert("You won!")
+    function clickCount() {
+        const count = clicks + 1;
+        setClicks(count);
+
     }
 
+
+    const [prevCard, setPrevCard] = useState(null);
+    const [clicks, setClicks] = useState(0);
+    const [won, setWon] = useState(false);
+    const [time, setTime] = useState(0);
     const [cards, setCards] = useState(cardArr)
+    const refSec = createRef();
     return (
         <>
-            <div className="Game">
-                {cards.map((card) => {
-                    return (
-                        <>
-                            <Card id={card.id}
-                                  key={card.id}
-                                  value={card.pairId}
-                                  src={card.src}
-                                  classes={
-                                      card.found ? (" found ")
-                                          :card.flipped ? (" clicked ")
-                                          : ""
-                                  }
-                                  clickMethod={() => clickEvent(card)}
+            {won
+                ?
+                (
+                    <WinnerForm time={time} setWon={setWon} clicks={clicks} users={users} setUsers={setUsers}
+                                setGameState={setGameState}/>
+                )
+                :
+                (
+                    <>
+                        <div className="Game">
+                            {cards.map((card) => {
+                                return (
+                                    <>
+                                        <Card id={card.id}
+                                              key={card.id}
+                                              value={card.pairId}
+                                              src={card.src}
+                                              classes={
+                                                  card.found ? (" found ")
+                                                      : card.flipped ? (" clicked ")
+                                                      : ""
+                                              }
+                                              clickMethod={() => clickEvent(card)}
 
-                            />
+                                        />
 
-                        </>)
-                })}
-            </div>
-            <Progress/>
+                                    </>)
+                            })}
+                        </div>
+
+                        <Progress refSec={refSec} setTime={setTime} won={won} clicks={clicks}/>
+                    </>
+                )
+            }
         </>
     )
-}
+};
 
 
 export default Game;

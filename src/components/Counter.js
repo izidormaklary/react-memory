@@ -1,20 +1,12 @@
-import {useState} from "react";
-const Counter = () => {
-    const [count, setCount] = useState(0);
-    const list = document.querySelectorAll('Card')
 
-    function increase(){
-        console.log(count)
-        let temp = count+1;
-        setCount(temp)
-    }
+const Counter = ({clicks}) => {
+
     return (
         <div className="Counter">
-            {count}
+            {clicks}
         </div>
     );
 }
-
 
 export default Counter;
 

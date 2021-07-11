@@ -1,10 +1,12 @@
 import Counter from "./Counter";
 import Stopwatch from "./Stopwatch";
-const Progress = () => {
+const Progress = ({clicks, won, setTime, refSec}) => {
+
+
     return (
         <div className="Progress">
-            <Stopwatch/>
-            <Counter />
+            <Stopwatch ref={refSec} won={won} setTime={setTime} />
+            <Counter clicks={clicks} />
         </div>
     );
 }
