@@ -1,4 +1,6 @@
 import './App.css';
+
+
 import {useState, useEffect} from "react";
 import Game from "./components/Game";
 import StartButton from "./components/StartButton";
@@ -28,7 +30,7 @@ for (let i = 0; i < 8; i++) {
 cardArr = cardArr.sort(() => Math.random() - 0.5);
 
 
-const MEMORYKEY = "memoryKey"
+const MEMORYKEY = "memoryKey!"
 
 function App() {
     const [gameState, setGameState] = useState(false);

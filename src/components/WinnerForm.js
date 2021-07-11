@@ -19,7 +19,7 @@ const WinnerForm = ({setWon, clicks, users, setUsers, setGameState, time}) => {
 
     return (
         <div className="WinnerForm">
-            <input ref={inputRef} type="text"/>
+            <input ref={inputRef} type="text" placeholder="Fill in your name"/>
             <button onClick={()=>handleSubmit()} >Submit score</button>
         </div>
     );

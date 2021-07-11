@@ -2,8 +2,8 @@
 const Leaderboard = ({users}) => {
     let i = 1;
     function countPoints(user) {
-        let pointsTime = Math.round(Math.pow((1.4 - user.time) * 100, 2));
-        let pointsClicks = (40 - user.clicks) * 100;
+        let pointsTime = Math.round((60 - (user.time.minutes*60+user.time.seconds)) * 100);
+        let pointsClicks =((50 - user.clicks) * 100);
         return pointsTime + pointsClicks;
     }
 
@@ -12,16 +12,19 @@ const Leaderboard = ({users}) => {
             <table className="LeaderBTable">
                 <thead>
                 <tr>
+                    <th colspan="5" > Leaderboard</th>
+                </tr>
+                <tr>
                     <th>
                         Rank
                     </th>
-                    <th>
+                    <th >
                         Name
                     </th>
-                    <th>
+                    <th className="dontShow">
                         Time
                     </th>
-                    <th>
+                    <th className="dontShow" >
                         Clicks
                     </th>
                     <th>
@@ -38,8 +41,8 @@ const Leaderboard = ({users}) => {
                     <tr key={user.name + i} >
                         <td>{i++}</td>
                         <td>{user.name}</td>
-                        <td>{user.time}</td>
-                        <td>{user.clicks}</td>
+                        <td className="dontShow">{user.time.minutes+":"+user.time.seconds}</td>
+                        <td className="dontShow">{user.clicks}</td>
                         <td>{countPoints(user)}</td>
                     </tr>
                 ) : ""

@@ -18,10 +18,12 @@
 
 .Game {
     display: grid;
-    grid-template-columns: repeat(4, 140px [col-start]);
-    grid-template-rows: repeat(4, 140px [col-start]);
+    grid-template-columns: repeat(4, 25% [col-start]);
+    grid-template-rows: repeat(4, 25% [col-start]);
     margin: auto;
-    width: 560px;
+    max-width: 560px;
+    width: 90%;
+
 }
 
 .Card {
@@ -30,13 +32,15 @@
     height: 90%;
     background-image: linear-gradient(60deg, rgba(225, 225, 225, 0.24), rgba(239, 231, 231, 0.9), rgba(218, 218, 218, 0.47)),
     linear-gradient(-60deg, rgba(141, 141, 141, 0.24), rgba(217, 213, 213, 0.9), rgba(255, 255, 255, 0.68));
-    margin: 10%;
+    margin: 5%;
     border-radius: 5px;
     box-shadow: 0px 2px rgb(135, 135, 135),
     0px 8px 8px rgb(77, 77, 77),
     inset 0px 0px 4px rgb(90, 90, 90);
-
     transition: 0.7s;
+}
+.Card:hover{
+    transform: scale(1.1);
 }
 
 .Card.clicked {
@@ -113,35 +117,66 @@
 }
 
 .StartButton {
+    box-shadow: 0px 2px rgb(135, 135, 135),
+    0px 8px 8px rgb(77, 77, 77),
+    inset 0px 0px 4px rgb(90, 90, 90);
+    color: #44448a;
     height: 70px;
-    width: 450px;
-    background-color: rgba(255, 255, 255, 0.71);
+    max-width: 450px;
+    width: 90%;
+    background-color: transparent;
     font: inherit;
     font-size: 40px;
     border: none;
     border-radius: 20px;
     margin-left: auto;
     margin-right: auto;
+    transition: 0.5s;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.31), rgba(248, 248, 248, 0.84));
+}
+
+.StartButton:hover {
+
+    letter-spacing: 4px;
+    background-color: rgba(255, 255, 255, 0.87);
 }
 
 .Leaderboard {
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
     align-self: end;
-    width: 450px;
+    max-width: 450px;
+    width: 90%;
 
+    max-height:60vh;
+    overflow: auto;
+
+}
+.LeaderBTable>tbody{
 
 }
 
 .LeaderBTable {
     width: 100%;
-    margin-top: 50px;
+
     border-spacing: 0;
 }
 
-.LeaderBTable>  thead > tr > th {
+.LeaderBTable > thead > tr:first-child > th {
+    border-radius: 7px 7px 0 0;
     padding: 15px;
     margin: 0;
-    background-color: rgba(11, 136, 223, 0.82);
+    border-bottom: 1px solid;
+    font-size: 40px;
+    color: mintcream;
+
+}
+
+.LeaderBTable > thead > tr > th {
+    padding: 15px;
+    margin: 0;
+    background-color: rgb(11, 136, 223);
     font-size: 20px;
     color: mintcream;
 }
@@ -170,43 +205,32 @@
     border-radius: 0 0 10px 0;
 }
 
-.LeaderBTable > thead> tr > th:first-child {
-    border-radius: 5px 0 0 0;
+.WinnerForm {
+    height: 45px;
+    padding: 0;
+    vertical-align: middle;
 }
-
-.LeaderBTable >thead> tr > th:last-child {
-    border-radius: 0 5px 0 0;
-}
-
-.WinnerForm *{
-    box-sizing: border-box;
-
-}
-.WinnerForm{
-    height:45px;
-    padding:0;
-    vertical-align:middle;
-}
-
 
 
 .WinnerForm > input {
-    vertical-align:middle;
+    vertical-align: middle;
     border: none;
-    margin:0;
+    margin: 0;
     border-radius: 10px 0 0 10px;
     font-size: 20px;
-padding: 5px;
-    height:100%;
+    padding: 5px;
+    height: 100%;
     box-sizing: border-box;
 
 }
+
 .WinnerForm > input:focus {
     border: none;
 
 }
+
 .WinnerForm > button {
-    vertical-align:middle;
+    vertical-align: middle;
     color: mintcream;
     height: 100%;
     font: inherit;
@@ -215,3 +239,58 @@ padding: 5px;
     border-radius: 0 10px 10px 0;
     background-color: rgba(11, 136, 223, 0.82);
 }
+
+tbody > tr:hover {
+    background-color: #282c34;
+}
+
+
+@media screen and (max-width: 600px) {
+    .dontShow {
+        display: none;
+    }
+
+    .Progress {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: 40px;
+        background-color: rgba(192, 192, 192, 0.56);
+    }
+
+    .Stopwatch {
+        float: left;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-left: 30%;
+        font-size: 25px;
+        font-weight: bold;
+        color: #0e5db3;
+    }
+
+    .Counter {
+        float: right;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 30%;
+        font-size: 25px;
+        font-weight: bold;
+        color: #0e5db3;
+    }
+
+    .WinnerForm > input {
+
+        border-radius: 10px;
+
+
+    }
+
+    .WinnerForm > button {
+        border-radius: 10px;
+
+    }
+}
+
+

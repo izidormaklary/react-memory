@@ -10,7 +10,7 @@ const Stopwatch = React.forwardRef(({setTime, won},ref)=> {
     useImperativeHandle(ref,()=> ({
         timeSetter()
         {
-            setTime(minutes+'.'+seconds)
+            setTime({minutes:minutes, seconds: seconds})
         }
     }))
 
