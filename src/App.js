@@ -5,7 +5,7 @@ import {useState, useEffect} from "react";
 import Game from "./components/Game";
 import StartButton from "./components/StartButton";
 import Leaderboard from "./components/Leaderboard";
-import { nanoid } from 'nanoid';
+import {nanoid} from 'nanoid';
 
 const iniUsers = [];
 let cardArr = []
@@ -43,12 +43,12 @@ function App() {
     }
 
     useEffect(() => {
-        setUsers(JSON.parse(localStorage.getItem(MEMORYKEY+".users")))
+        setUsers(JSON.parse(localStorage.getItem(MEMORYKEY + ".users")))
     }, []);
 
     useEffect(() => {
         window.localStorage.setItem(MEMORYKEY + ".users", JSON.stringify(users));
-    },[users]);
+    }, [users]);
 
     return (
         <div className="App">

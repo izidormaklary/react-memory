@@ -5,7 +5,6 @@ import WinnerForm from "./WinnerForm";
 
 let pairs = [];
 
-
 function Game({users, setUsers, setGameState, cardArr}) {
     function clickEvent(card) {
         if (!card.found && !card.flipped && card !== prevCard) {
