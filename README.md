@@ -10,4 +10,4 @@ Simple memory game using react.js.
 * developing game logic
 * scoring system (click counter, stopwatch)
 * putting leaderboard in localstorage
-### hosted on [netlify(click)](https://app.netlify.com/sites/react-memory-izidor/overview)
+### hosted on [netlify(click)](https://react-memory-izidor.netlify.app/)
